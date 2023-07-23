@@ -14,3 +14,21 @@ class Advertisement(models.Model):# наследую класс Model для с�
     auction = models.BooleanField("торг", help_text='Отметьте, возможен ли торг')
     created_at = models.DateTimeField(auto_now_add=True)# сохраняем дату создания
     updated_at = models.DateTimeField(auto_now=True)# дата будет обновляться каждый раз при измении обьявления
+
+    def __str__(self) -> str:
+        return f"Advertisement(id={self.id}, title={self.title}, price={self.price})"
+    # для работы с самой таблицы
+    class Meta:
+        db_table = 'add' # название таблицы
+
+
+# from add.models import Advertisement
+# adv1 = Advertisement(title = 'Дошик', description = 'Дошик с помидором', price = 26, auction = True) # создал запись
+# adv1.save() # сохранение записи
+
+# Advertisement.objects.all()    
+
+# from django.db import connection
+# connection.queries # увидеть все запросы в sql
+
+# exit()
