@@ -57,7 +57,7 @@ class Advertisement(models.Model):# наследую класс Model для с�
                 self.image.url
             )
         return format_html(
-                "<img src = 'http://127.0.0.1:8000/media/advertisements/a.jpg' width='100px' heigth = '100px' ",
+                "<img src = 'http://127.0.0.1:8000/media/advetrisements/iozh.jpg' width='100px' heigth = '100px' ",
                 
             )
 

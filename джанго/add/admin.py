@@ -9,7 +9,7 @@ from decimal import Decimal
 #  admin_class - класс для кастомизации
 class AdvertisementAdmin(admin.ModelAdmin):
    # отображение в витде таблицы
-   list_display = ['id','user','title','description','price','auction','updated_date', 'created_date', 'photo']  
+   list_display = ['id','user','title','description','price','auction','update_date', 'created_date', 'photo']  
    # параметры фильтрации
    list_filter = ['auction', 'created_at']
    #добавляю функции  лдля выбранных записей
