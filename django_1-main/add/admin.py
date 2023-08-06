@@ -8,16 +8,32 @@ from django.db.models.query import QuerySet
 
 class AdvertisementAdmin(admin.ModelAdmin):
     # отображение в виде таблицы
-    list_display = ['id', 'title', 'description', 'price', 'auction', 'created_at']
+    list_display = ['id', 'title', 'description', 'price', 'auction', 'created_at', 'created_date', 'updated_date']
     # параметры фильтрации
     list_filter = ['auction', 'created_at']
 
     # добавляю функции для выбранных хаписей
     actions = ['make_auction_as_false']
 
+    # создание блоков
+    fieldsets = (
+        (# 1 блок
+            'Общее',{ # название блока
+                'fields':('title', 'description') # поля блока
+            }
+        ),
+        (# 1 блок
+            'Финансы',{ # название блока
+                'fields':('price', 'auction'), # поля блока
+                'classes':['collapse'], # функционал для срытия блока
+                'description':'Блок финансов' # Подсказка о блоке
+            }
+        )
+    )
+
     @admin.action(description='Убрать возможность торга')
     def make_auction_as_false(self, request, queryset:QuerySet):
-        queryset.update(auctoin = False)
+        queryset.update(auction = False)
 
 
 admin.site.register(Advertisement, AdvertisementAdmin) # подключаем модель

@@ -9,17 +9,18 @@ from decimal import Decimal
 #  admin_class - класс для кастомизации
 class AdvertisementAdmin(admin.ModelAdmin):
    # отображение в витде таблицы
-   list_display = ['id','title','description','price','auction','updated_date', 'created_date']  
+   list_display = ['id','user','title','description','price','auction','updated_date', 'created_date', 'photo']  
    # параметры фильтрации
    list_filter = ['auction', 'created_at']
    #добавляю функции  лдля выбранных записей
+   search_fields = ['title']
    actions = ['make_auction_as_false','make_auction_as_true','sale_30']
    # создание блоков
    fieldsets = (
       (#1 блок
          'Общее',# название блока
          {
-            'fields':('title','description') # поля блока
+            'fields':('title','description', 'user', 'image') # поля блока
          }
       ),
       (#2 блок

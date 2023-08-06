@@ -21,7 +21,8 @@ from django.urls import path, include
 
 # импортирую свои представления
 from lesson_4.views import lesson
-
+from django.conf import settings
+from django.conf.urls.static import static #функция для создания картинок
 
 # главный маршрутизатор
 
@@ -38,3 +39,6 @@ urlpatterns = [
     path("", include('add.urls')), # подключил марштрутизатор приложения add
     path("lesson_4/", lesson)
 ]   
+
+if settings.DEBUG: # Если сайт в разработке
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #указал ссылку и путь к файлу медиа

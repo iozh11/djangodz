@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib import admin
+from django.utils import timezone # Для времени
+from django.utils.html import format_html # для создания строки html
 
 
 #venv/Scripts/activate
@@ -20,6 +23,24 @@ class Advertisement(models.Model):# наследую класс Model для с�
     # для работы с самой таблицы
     class Meta:
         db_table = 'add' # название таблицы
+    
+    @admin.display(description='для создания')
+    def created_date(self):
+        if self.created_at.date() == timezone.now().date(): # проверяю, что запись была создана сегодня
+            created_time = self.created_at.time().strftime('%H:%M:%S') #делаю в формате часы:минуты:секунды
+            return format_html(
+                '<span style = "color:green; font-weight:bold">Сегодня в {}</span>', created_time
+            )
+        return self.created_at.time().strftime('%d.%m.%Y at %H:%M:%S')
+    
+    @admin.display(description='для обновления')
+    def updated_date(self):
+        if self.updated_at.date() == timezone.now().date(): # проверяю, что запись была создана сегодня
+            updated_time = self.updated_at.time().strftime('%H:%M:%S') #делаю в формате часы:минуты:секунды
+            return format_html(
+                '<span style = "color:green; font-weight:bold">Сегодня в {}</span>', updated_time
+            )
+        return self.updated_at.time().strftime('%d.%m.%Y at %H:%M:%S')
 
 
 # from add.models import Advertisement
